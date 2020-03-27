@@ -4,6 +4,8 @@ function shift_days = fn_get_shift(s_data_type, date_to_hit_thresh,thresh,Data)
 
 if strcmp(s_data_type,'cases')
     data_gt_thresh = Data.cases > thresh;
+elseif strcmp(s_data_type,'cases_norm')
+    data_gt_thresh = Data.cases/Data.population > thresh;
 elseif strcmp(s_data_type,'deaths')
     data_gt_thresh = Data.deaths > thresh;
 elseif strcmp(s_data_type,'deaths_norm')
