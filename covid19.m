@@ -183,8 +183,6 @@ legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-10'), datetime('today')+21])
 ylim([0,300])
 
-% figure(12)
-
 fig13 = figure(13);
 if CTRL_SAVE_PLOT, fig13.WindowStyle = 'normal'; fig13.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
@@ -271,6 +269,22 @@ legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-16'), datetime('today')+14])
 ylim([0,5])
 
+fig23 = figure(23);
+if CTRL_SAVE_PLOT, fig23.WindowStyle = 'normal'; fig23.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
+leg = {};
+for i = 1:length(R)
+    plot(R{i}.dates(2:end)-R{i}.shift_deaths,diff(R{i}.deaths),R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths); hold on
+end
+% plot([datetime('2019-12-01'),today_date+30],[thresh_deaths_norm,thresh_deaths_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_deaths_norm); hold on
+hold off
+ylabel('deaths/day'); %xlabel('days')
+title('COVID-19 shifted to same deaths at threshold');
+legend(leg,'Location','NorthWest','FontSize',12)
+xlim([datetime('2020-03-14'), datetime('today')+14])
+ylim([0,50])
+
+% figure(23)
+
 fig24 = figure(24);
 if CTRL_SAVE_PLOT, fig24.WindowStyle = 'normal'; fig24.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
@@ -302,6 +316,7 @@ if CTRL_SAVE_PLOT
     if exist('fig20','var'), saveas(fig20,sprintf('%s/covid19-2b-deaths-shift.jpg',out_folder)); end  
     if exist('fig21','var'), saveas(fig21,sprintf('%s/covid19-2c-deaths-norm.jpg',out_folder)); end  
     if exist('fig22','var'), saveas(fig22,sprintf('%s/covid19-2d-deaths-norm-shift.jpg',out_folder)); end  
+    if exist('fig23','var'), saveas(fig23,sprintf('%s/covid19-2e-deaths-day-shift.jpg',out_folder)); end  
     if exist('fig24','var'), saveas(fig24,sprintf('%s/covid19-2f-deaths-day-norm-shift.jpg',out_folder)); end  
 end
 
