@@ -2,7 +2,7 @@ clearvars; clearvars -GLOBAL; close all; plotbrowser('off'); %clc
 set(0,'DefaultFigureWindowStyle','docked')
 
 CTRL_SAVE_DATA = 0;
-CTRL_SAVE_PLOT = 1;
+CTRL_SAVE_PLOT = 0;
 
 sLW = 'LineWidth';
 sLS = 'LineStyle';
@@ -109,12 +109,19 @@ oSpain.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oSp
 oSpain.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oSpain);
 R{end+1} = oSpain;
 
-oOntario = fn_create_region('Ontario',14,'2020-03-01',nLW_O,'o-');
+oOntario = fn_create_region('Ontario',14.3,'2020-03-01',nLW_O,'o-');
 oOntario.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oOntario);
 oOntario.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oOntario);
 oOntario.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oOntario);
 oOntario.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oOntario);
 R{end+1} = oOntario;
+
+oQuebec = fn_create_region('Quebec',8.5,'2020-02-28',nLW_O,'o-');
+oQuebec.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oQuebec);
+oQuebec.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oQuebec);
+oQuebec.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oQuebec);
+oQuebec.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oQuebec);
+R{end+1} = oQuebec;
 
 oOttawa = fn_create_region('Ottawa',0.9,'2020-03-11',nLW_O,'o-');
 oOttawa.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oOttawa);
@@ -323,6 +330,7 @@ end
 if CTRL_SAVE_DATA
     fn_save_country_data(oCanada);
     fn_save_country_data(oOntario);
+    fn_save_country_data(oQuebec);
     fn_save_country_data(oOttawa);
     fn_save_country_data(oItaly);
     fn_save_country_data(oChina);
