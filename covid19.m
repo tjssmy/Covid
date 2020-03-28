@@ -1,6 +1,9 @@
 clearvars; clearvars -GLOBAL; close all; plotbrowser('off'); %clc
 set(0,'DefaultFigureWindowStyle','docked')
 
+% winstyle = 'normal';
+winstyle = 'docked';
+
 CTRL_SAVE_DATA = 0;
 CTRL_SAVE_PLOT = 1;
 
@@ -124,7 +127,7 @@ oOttawa.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,t
 R{end+1} = oOttawa;
 
 fig1 = figure(1);
-if CTRL_SAVE_PLOT, fig1.WindowStyle = 'normal'; fig1.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
+if CTRL_SAVE_PLOT, fig1.WindowStyle = winstyle; fig1.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
     plot(R{i}.dates,R{i}.cases,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
@@ -139,7 +142,7 @@ xlim([datetime('2020-01-21'), datetime('today')+1])
 % ylim([0,10000])
 
 fig10 = figure(10);
-if CTRL_SAVE_PLOT, fig10.WindowStyle = 'normal'; fig10.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
+if CTRL_SAVE_PLOT, fig10.WindowStyle = winstyle; fig10.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
     plot(R{i}.dates-R{i}.shift_cases,R{i}.cases,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
@@ -153,7 +156,7 @@ xlim([datetime('2020-01-21'), datetime('today')+21])
 ylim([0,20000])
 
 fig11 = figure(11);
-if CTRL_SAVE_PLOT, fig11.WindowStyle = 'normal'; fig11.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
+if CTRL_SAVE_PLOT, fig11.WindowStyle = winstyle; fig11.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
     plot(R{i}.dates,R{i}.cases/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
@@ -170,7 +173,7 @@ ylim([0,300])
 % figure(10)
 
 fig12 = figure(12);
-if CTRL_SAVE_PLOT, fig12.WindowStyle = 'normal'; fig12.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
+if CTRL_SAVE_PLOT, fig12.WindowStyle = winstyle; fig12.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
     plot(R{i}.dates-R{i}.shift_cases_norm,R{i}.cases/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases_norm); hold on
@@ -184,7 +187,7 @@ xlim([datetime('2020-03-10'), datetime('today')+21])
 ylim([0,300])
 
 fig13 = figure(13);
-if CTRL_SAVE_PLOT, fig13.WindowStyle = 'normal'; fig13.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
+if CTRL_SAVE_PLOT, fig13.WindowStyle = winstyle; fig13.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
     plot(R{i}.dates(2:end)-R{i}.shift_cases,diff(R{i}.cases),R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
@@ -198,7 +201,7 @@ xlim([datetime('2020-03-14'), datetime('today')+21])
 ylim([0,15000])
 
 fig14 = figure(14);
-if CTRL_SAVE_PLOT, fig14.WindowStyle = 'normal'; fig14.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
+if CTRL_SAVE_PLOT, fig14.WindowStyle = winstyle; fig14.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
     plot(R{i}.dates(2:end)-R{i}.shift_cases,diff(R{i}.cases)/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
@@ -212,7 +215,7 @@ xlim([datetime('2020-03-14'), datetime('today')+21])
 % ylim([0,15000])
 
 fig2 = figure(2);
-if CTRL_SAVE_PLOT, fig2.WindowStyle = 'normal'; fig2.Position = [240 378 760 720]; end %default: [440 378 560 420] %'docked')
+if CTRL_SAVE_PLOT, fig2.WindowStyle = winstyle; fig2.Position = [240 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
     plot(R{i}.dates,R{i}.deaths,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
@@ -227,7 +230,7 @@ xlim([datetime('2020-02-21'), datetime('today')])
 ylim([0,7000])
 
 fig20 = figure(20);
-if CTRL_SAVE_PLOT, fig20.WindowStyle = 'normal'; fig20.Position = [340 378 760 720]; end %default: [440 378 560 420] %'docked')
+if CTRL_SAVE_PLOT, fig20.WindowStyle = winstyle; fig20.Position = [340 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
     plot(R{i}.dates-R{i}.shift_deaths,R{i}.deaths,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths); hold on
@@ -241,7 +244,7 @@ xlim([datetime('2020-03-14'), datetime('today')+7])
 ylim([0,200])
 
 fig21 = figure(21);
-if CTRL_SAVE_PLOT, fig21.WindowStyle = 'normal'; fig21.Position = [440 378 760 720]; end %default: [440 378 560 420] %'docked')
+if CTRL_SAVE_PLOT, fig21.WindowStyle = winstyle; fig21.Position = [440 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
     plot(R{i}.dates,R{i}.deaths/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
@@ -256,7 +259,7 @@ xlim([datetime('2020-02-01'), datetime('today')])
 ylim([0,10]) % Italy: 120])
 
 fig22 = figure(22);
-if CTRL_SAVE_PLOT, fig22.WindowStyle = 'normal'; fig22.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
+if CTRL_SAVE_PLOT, fig22.WindowStyle = winstyle; fig22.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
     plot(R{i}.dates-R{i}.shift_deaths_norm,R{i}.deaths/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
@@ -270,7 +273,7 @@ xlim([datetime('2020-03-16'), datetime('today')+14])
 ylim([0,5])
 
 fig23 = figure(23);
-if CTRL_SAVE_PLOT, fig23.WindowStyle = 'normal'; fig23.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
+if CTRL_SAVE_PLOT, fig23.WindowStyle = winstyle; fig23.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
     plot(R{i}.dates(2:end)-R{i}.shift_deaths,diff(R{i}.deaths),R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths); hold on
@@ -286,7 +289,7 @@ ylim([0,50])
 % figure(23)
 
 fig24 = figure(24);
-if CTRL_SAVE_PLOT, fig24.WindowStyle = 'normal'; fig24.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
+if CTRL_SAVE_PLOT, fig24.WindowStyle = winstyle; fig24.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
     plot(R{i}.dates(2:end)-R{i}.shift_deaths_norm,diff(R{i}.deaths/R{i}.population),R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
