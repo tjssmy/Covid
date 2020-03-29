@@ -2,7 +2,7 @@ clearvars; clearvars -GLOBAL; close all; plotbrowser('off'); %clc
 set(0,'DefaultFigureWindowStyle','docked')
 
 CTRL_SAVE_DATA = 0;
-CTRL_SAVE_PLOT = 0;
+CTRL_SAVE_PLOT = 1;
 
 sPgm = 'covid19';
 fn_log = sprintf('%s.txt',sPgm);
@@ -205,7 +205,7 @@ ylabel('cases/million'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-10'), datetime('today')+21])
-ylim([0,300])
+ylim([0,1000]) %300])
 
 fig13 = figure(13);
 if CTRL_SAVE_PLOT, fig13.WindowStyle = 'normal'; fig13.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -277,7 +277,8 @@ title('COVID-19 Normalized for population')
 % title('FFT E(z)');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-02-01'), datetime('today')])
-ylim([0,10]) % Italy: 120])
+ymax21 = 12;
+ylim([0,ymax21]) % Italy: 120])
 
 fig22 = figure(22);
 if CTRL_SAVE_PLOT, fig22.WindowStyle = 'normal'; fig22.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -291,7 +292,7 @@ ylabel('deaths/million'); %xlabel('days')
 title('COVID-19 Normalized by population, shifted to same deaths at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-16'), datetime('today')+14])
-ylim([0,5])
+ylim([0,ymax21]) % 5])
 
 fig23 = figure(23);
 if CTRL_SAVE_PLOT, fig23.WindowStyle = 'normal'; fig23.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
