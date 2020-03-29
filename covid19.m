@@ -139,6 +139,14 @@ oQuebec.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,t
 fn_region_fprintf(fid_log,oQuebec);
 R{end+1} = oQuebec;
 
+oNewYork = fn_create_region('NewYork',20,'2020-03-01',nLW_O,'o-');
+oNewYork.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oNewYork);
+oNewYork.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oNewYork);
+oNewYork.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oNewYork);
+oNewYork.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oNewYork);
+fn_region_fprintf(fid_log,oNewYork);
+R{end+1} = oNewYork;
+
 oOttawa = fn_create_region('Ottawa',0.9,'2020-03-11',nLW_O,'o-');
 oOttawa.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oOttawa);
 oOttawa.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oOttawa);
@@ -357,6 +365,7 @@ if CTRL_SAVE_DATA
     fn_save_country_data(oGermany);
     fn_save_country_data(oDenmark);
     fn_save_country_data(oSpain);
+    fn_save_country_data(oNewYork);
 end
 
 % fclose(fid_log);
