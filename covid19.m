@@ -5,7 +5,13 @@ set(0,'DefaultFigureWindowStyle','docked')
 winstyle = 'docked';
 
 CTRL_SAVE_DATA = 0;
-CTRL_SAVE_PLOT = 0;
+CTRL_SAVE_PLOT = 1;
+
+sPgm = 'covid19';
+fn_log = sprintf('%s.txt',sPgm);
+fid_log = fopen(fn_log,'w');
+% stdout = 1;
+% fid_log = stdout;
 
 sLW = 'LineWidth';
 sLS = 'LineStyle';
@@ -60,6 +66,7 @@ data_gt_thresh = oCanada.deaths/oCanada.population > thresh_deaths_norm; % find 
 thresh_i = find(data_gt_thresh,1);
 thresh_date_deaths_norm = oCanada.dates(thresh_i); 
 oCanada.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oCanada); % find date shift so data is at threshold on thresh_date
+fn_region_fprintf(fid_log,oCanada);
 R{end+1} = oCanada;  % update shift parms before copy value to R{}
 
 
@@ -68,6 +75,7 @@ oItaly.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oItaly)
 oItaly.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oItaly);
 oItaly.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oItaly);
 oItaly.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oItaly);
+fn_region_fprintf(fid_log,oItaly);
 R{end+1} = oItaly;
 
 oChina = fn_create_region('China',1400,'2020-01-22',nLW,'o-');
@@ -75,6 +83,7 @@ oChina.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oChina)
 oChina.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oChina);
 oChina.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oChina);
 oChina.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oChina);
+fn_region_fprintf(fid_log,oChina);
 R{end+1} = oChina;
 
 oUSA = fn_create_region('USA',328,'2020-01-22',nLW,'o-');
@@ -82,6 +91,7 @@ oUSA.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oUSA);
 oUSA.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oUSA);
 oUSA.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oUSA);
 oUSA.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oUSA);
+fn_region_fprintf(fid_log,oUSA);
 R{end+1} = oUSA;
 
 oSKorea = fn_create_region('SKorea',52,'2020-01-22',nLW,'o-');
@@ -89,6 +99,7 @@ oSKorea.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oSKore
 oSKorea.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oSKorea);
 oSKorea.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oSKorea);
 oSKorea.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oSKorea);
+fn_region_fprintf(fid_log,oSKorea);
 R{end+1} = oSKorea;
 
 oGermany = fn_create_region('Germany',83,'2020-02-24',nLW,'o-');
@@ -96,6 +107,7 @@ oGermany.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oGerm
 oGermany.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oGermany);
 oGermany.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oGermany);
 oGermany.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oGermany);
+fn_region_fprintf(fid_log,oGermany);
 R{end+1} = oGermany;
 
 oDenmark = fn_create_region('Denmark',6,'2020-02-27',nLW,'*:');
@@ -103,6 +115,7 @@ oDenmark.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oDenm
 oDenmark.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oDenmark);
 oDenmark.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oDenmark);
 oDenmark.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oDenmark);
+fn_region_fprintf(fid_log,oDenmark);
 R{end+1} = oDenmark;
 
 oSpain = fn_create_region('Spain',47,'2020-01-31',nLW,'*:');
@@ -110,6 +123,7 @@ oSpain.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oSpain)
 oSpain.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oSpain);
 oSpain.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oSpain);
 oSpain.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oSpain);
+fn_region_fprintf(fid_log,oSpain);
 R{end+1} = oSpain;
 
 oOntario = fn_create_region('Ontario',14.3,'2020-03-01',nLW_O,'o-');
@@ -117,6 +131,7 @@ oOntario.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oOnta
 oOntario.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oOntario);
 oOntario.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oOntario);
 oOntario.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oOntario);
+fn_region_fprintf(fid_log,oOntario);
 R{end+1} = oOntario;
 
 oQuebec = fn_create_region('Quebec',8.5,'2020-02-28',nLW_O,'o-');
@@ -124,6 +139,7 @@ oQuebec.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oQuebe
 oQuebec.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oQuebec);
 oQuebec.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oQuebec);
 oQuebec.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oQuebec);
+fn_region_fprintf(fid_log,oQuebec);
 R{end+1} = oQuebec;
 
 oOttawa = fn_create_region('Ottawa',0.9,'2020-03-11',nLW_O,'o-');
@@ -131,6 +147,7 @@ oOttawa.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oOttaw
 oOttawa.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oOttawa);
 oOttawa.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oOttawa);
 oOttawa.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oOttawa);
+fn_region_fprintf(fid_log,oOttawa);
 R{end+1} = oOttawa;
 
 fig1 = figure(1);
@@ -191,7 +208,7 @@ ylabel('cases/million'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-10'), datetime('today')+21])
-ylim([0,300])
+ylim([0,1000]) %300])
 
 fig13 = figure(13);
 if CTRL_SAVE_PLOT, fig13.WindowStyle = winstyle; fig13.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -263,7 +280,8 @@ title('COVID-19 Normalized for population')
 % title('FFT E(z)');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-02-01'), datetime('today')])
-ylim([0,10]) % Italy: 120])
+ymax21 = 12;
+ylim([0,ymax21]) % Italy: 120])
 
 fig22 = figure(22);
 if CTRL_SAVE_PLOT, fig22.WindowStyle = winstyle; fig22.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -277,7 +295,7 @@ ylabel('deaths/million'); %xlabel('days')
 title('COVID-19 Normalized by population, shifted to same deaths at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-16'), datetime('today')+14])
-ylim([0,5])
+ylim([0,ymax21]) % 5])
 
 fig23 = figure(23);
 if CTRL_SAVE_PLOT, fig23.WindowStyle = winstyle; fig23.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -343,3 +361,6 @@ if CTRL_SAVE_DATA
     fn_save_country_data(oDenmark);
     fn_save_country_data(oSpain);
 end
+
+% fclose(fid_log);
+
