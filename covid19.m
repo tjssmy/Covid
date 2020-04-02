@@ -160,6 +160,7 @@ days = linspace(0,1e2);
 y_dbl_day = 2.^days;
 y_dbl_2_days = 2.^(days/2);
 y_dbl_3_days = 2.^(days/3);
+y_dbl_4_days = 2.^(days/4);
 
 fig1 = figure(1);
 if CTRL_SAVE_PLOT, fig1.WindowStyle = 'normal'; fig1.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -200,6 +201,7 @@ semilogy([datetime('2019-12-01'),today_date+30],[thresh_cases,thresh_cases],'k')
 semilogy(datetime('2020-03-08')+days,y_dbl_day,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
 semilogy(datetime('2020-02-27')+days+0.5,y_dbl_2_days,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
 semilogy(datetime('2020-02-19')+days,y_dbl_3_days,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-02-10')+days,y_dbl_4_days,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
 hold off
 ylabel('cases'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
@@ -248,6 +250,7 @@ semilogy([datetime('2019-12-01'),today_date+30],[thresh_cases_norm,thresh_cases_
 semilogy(datetime('2020-03-13')+days,y_dbl_day,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
 semilogy(datetime('2020-03-09')+days+0.5,y_dbl_2_days,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
 semilogy(datetime('2020-03-05')+days,y_dbl_3_days,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-03-02')+days,y_dbl_4_days,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
 hold off
 ylabel('cases/million'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
@@ -353,6 +356,7 @@ scal = 100;
 semilogy(datetime('2020-03-14')+days,y_dbl_day/scal,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
 semilogy(datetime('2020-03-09')+days,y_dbl_2_days/scal,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
 semilogy(datetime('2020-03-04')+days,y_dbl_3_days/scal,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-02-28')+days,y_dbl_4_days/scal,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
 hold off
 ylabel('deaths/million'); %xlabel('days')
 title('COVID-19 Normalized by population, shifted to same deaths at threshold');
