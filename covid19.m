@@ -33,6 +33,7 @@ cLtYel = [1 0.9 0.7]; % cYel = [0.9290 0.6940 0.1250];
 nLW = 2;
 nLW_O = 4;
 nLW_C = 6; % Canada
+nLW_dbl = 1;  % plots of growth per day (ie double per day)
 
 R = {};
 
@@ -158,6 +159,12 @@ oOttawa.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,t
 fn_region_fprintf(fid_log,oOttawa);
 R{end+1} = oOttawa;
 
+days = linspace(0,1e2);
+y_dbl_day = 2.^days;
+y_dbl_2_days = 2.^(days/2);
+y_dbl_3_days = 2.^(days/3);
+y_dbl_4_days = 2.^(days/4);
+
 fig1 = figure(1);
 if CTRL_SAVE_PLOT, fig1.WindowStyle = winstyle; fig1.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
@@ -186,6 +193,24 @@ title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-01-21'), datetime('today')+21])
 ylim([0,20000])
+
+fig15 = figure(15);
+if CTRL_SAVE_PLOT, fig15.WindowStyle = 'normal'; fig15.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
+leg = {};
+for i = 1:length(R)
+    semilogy(R{i}.dates-R{i}.shift_cases,R{i}.cases,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
+end
+semilogy([datetime('2019-12-01'),today_date+30],[thresh_cases,thresh_cases],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases); hold on
+semilogy(datetime('2020-03-08')+days,y_dbl_day,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
+semilogy(datetime('2020-02-27')+days+0.5,y_dbl_2_days,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
+semilogy(datetime('2020-02-19')+days,y_dbl_3_days,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-02-10')+days,y_dbl_4_days,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
+hold off
+ylabel('cases'); %xlabel('days')
+title('COVID-19 shifted to same cases at threshold');
+legend(leg,'Location','NorthWest','FontSize',12)
+xlim([datetime('2020-03-09'), datetime('today')+21])
+ylim([1e2,1e6])
 
 fig11 = figure(11);
 if CTRL_SAVE_PLOT, fig11.WindowStyle = winstyle; fig11.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -217,6 +242,24 @@ title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-10'), datetime('today')+21])
 ylim([0,1000]) %300])
+
+fig16 = figure(16);
+if CTRL_SAVE_PLOT, fig16.WindowStyle = 'normal'; fig16.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
+leg = {};
+for i = 1:length(R)
+    semilogy(R{i}.dates-R{i}.shift_cases_norm,R{i}.cases/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases_norm); hold on
+end
+semilogy([datetime('2019-12-01'),today_date+30],[thresh_cases_norm,thresh_cases_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases_norm); hold on
+semilogy(datetime('2020-03-13')+days,y_dbl_day,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
+semilogy(datetime('2020-03-09')+days+0.5,y_dbl_2_days,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
+semilogy(datetime('2020-03-05')+days,y_dbl_3_days,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-03-02')+days,y_dbl_4_days,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
+hold off
+ylabel('cases/million'); %xlabel('days')
+title('COVID-19 shifted to same cases at threshold');
+legend(leg,'Location','NorthWest','FontSize',12)
+xlim([datetime('2020-03-13'), datetime('today')+21])
+ylim([1e1,1e4]) %300])
 
 fig13 = figure(13);
 if CTRL_SAVE_PLOT, fig13.WindowStyle = winstyle; fig13.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -305,6 +348,27 @@ legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-16'), datetime('today')+14])
 ylim([0,ymax21]) % 5])
 
+fig25 = figure(25);
+if CTRL_SAVE_PLOT, fig25.WindowStyle = 'normal'; fig25.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
+leg = {};
+for i = 1:length(R)
+    semilogy(R{i}.dates-R{i}.shift_deaths_norm,R{i}.deaths/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+end
+semilogy([datetime('2019-12-01'),today_date+30],[thresh_deaths_norm,thresh_deaths_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_deaths_norm); hold on
+scal = 100;
+semilogy(datetime('2020-03-14')+days,y_dbl_day/scal,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
+semilogy(datetime('2020-03-09')+days,y_dbl_2_days/scal,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
+semilogy(datetime('2020-03-04')+days,y_dbl_3_days/scal,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-02-28')+days,y_dbl_4_days/scal,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
+hold off
+ylabel('deaths/million'); %xlabel('days')
+title('COVID-19 Normalized by population, shifted to same deaths at threshold');
+legend(leg,'Location','NorthWest','FontSize',12)
+xlim([datetime('2020-03-16'), datetime('today')+14])
+ylim([1e-1,1e2]) % 5])
+
+% figure(25)
+
 fig23 = figure(23);
 if CTRL_SAVE_PLOT, fig23.WindowStyle = winstyle; fig23.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
@@ -335,7 +399,7 @@ legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-16'), datetime('today')+7])
 ylim([0,3]) %10])
 
-figure(12)
+figure(25)
 
 if CTRL_SAVE_PLOT
     out_folder = 'plot';
@@ -344,14 +408,17 @@ if CTRL_SAVE_PLOT
 
     if exist('fig1','var'), saveas(fig1,sprintf('%s/covid19-1a-cases.jpg',out_folder)); end  
     if exist('fig10','var'), saveas(fig10,sprintf('%s/covid19-1b-cases-shift.jpg',out_folder)); end  
+    if exist('fig15','var'), saveas(fig15,sprintf('%s/covid19-1b2-cases-shift-log.jpg',out_folder)); end  
     if exist('fig11','var'), saveas(fig11,sprintf('%s/covid19-1c-cases-norm.jpg',out_folder)); end  
     if exist('fig12','var'), saveas(fig12,sprintf('%s/covid19-1d-cases-norm-shift.jpg',out_folder)); end  
+    if exist('fig16','var'), saveas(fig16,sprintf('%s/covid19-1d2-cases-norm-shift-log.jpg',out_folder)); end  
     if exist('fig13','var'), saveas(fig13,sprintf('%s/covid19-1e-cases-day-shift.jpg',out_folder)); end  
     if exist('fig14','var'), saveas(fig14,sprintf('%s/covid19-1f-cases-day-norm-shift.jpg',out_folder)); end  
     if exist('fig2','var'), saveas(fig2,sprintf('%s/covid19-2a-deaths.jpg',out_folder)); end  
     if exist('fig20','var'), saveas(fig20,sprintf('%s/covid19-2b-deaths-shift.jpg',out_folder)); end  
     if exist('fig21','var'), saveas(fig21,sprintf('%s/covid19-2c-deaths-norm.jpg',out_folder)); end  
     if exist('fig22','var'), saveas(fig22,sprintf('%s/covid19-2d-deaths-norm-shift.jpg',out_folder)); end  
+    if exist('fig25','var'), saveas(fig25,sprintf('%s/covid19-2d2-deaths-norm-shift-log.jpg',out_folder)); end  
     if exist('fig23','var'), saveas(fig23,sprintf('%s/covid19-2e-deaths-day-shift.jpg',out_folder)); end  
     if exist('fig24','var'), saveas(fig24,sprintf('%s/covid19-2f-deaths-day-norm-shift.jpg',out_folder)); end  
 end
