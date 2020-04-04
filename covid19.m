@@ -156,6 +156,22 @@ oOttawa.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,t
 fn_region_fprintf(fid_log,oOttawa);
 R{end+1} = oOttawa;
 
+oBC = fn_create_region('BC',4.9,'2020-03-01',nLW_O,'o-');
+oBC.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oBC);
+oBC.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oBC);
+oBC.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oBC);
+oBC.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oBC);
+fn_region_fprintf(fid_log,oBC);
+R{end+1} = oBC;
+
+oSweden = fn_create_region('Sweden',10.3,'2020-03-01',nLW,'*-');
+oSweden.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oSweden);
+oSweden.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oSweden);
+oSweden.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oSweden);
+oSweden.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oSweden);
+fn_region_fprintf(fid_log,oSweden);
+R{end+1} = oSweden;
+
 days = linspace(0,1e2);
 y_dbl_day = 2.^days;
 y_dbl_2_days = 2.^(days/2);
@@ -213,7 +229,7 @@ fig11 = figure(11);
 if CTRL_SAVE_PLOT, fig11.WindowStyle = 'normal'; fig11.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates,R{i}.cases/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
+    plot(R{i}.dates,R{i}.cases/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=m_description(R{i}); hold on
 end
 plot([datetime('2019-12-01'),today_date+30],[thresh_cases_norm,thresh_cases_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases_norm); hold on
 hold off
@@ -424,6 +440,7 @@ if CTRL_SAVE_DATA
     fn_save_country_data(oCanada);
     fn_save_country_data(oOntario);
     fn_save_country_data(oQuebec);
+    fn_save_country_data(oBC);
     fn_save_country_data(oOttawa);
     fn_save_country_data(oItaly);
     fn_save_country_data(oChina);
@@ -433,6 +450,7 @@ if CTRL_SAVE_DATA
     fn_save_country_data(oDenmark);
     fn_save_country_data(oSpain);
     fn_save_country_data(oNewYork);
+    fn_save_country_data(oSweden);
 end
 
 % fclose(fid_log);
