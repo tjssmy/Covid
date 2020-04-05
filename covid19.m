@@ -172,6 +172,14 @@ oSweden.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,t
 fn_region_fprintf(fid_log,oSweden);
 R{end+1} = oSweden;
 
+oFrance = fn_create_region('France',67,'2020-02-25',nLW,'*--');
+oFrance.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oFrance);
+oFrance.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oFrance);
+oFrance.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oFrance);
+oFrance.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oFrance);
+fn_region_fprintf(fid_log,oFrance);
+R{end+1} = oFrance;
+
 days = linspace(0,1e2);
 y_dbl_day = 2.^days;
 y_dbl_2_days = 2.^(days/2);
@@ -214,15 +222,15 @@ for i = 1:length(R)
     semilogy(R{i}.dates-R{i}.shift_cases,R{i}.cases,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
 end
 semilogy([datetime('2019-12-01'),today_date+30],[thresh_cases,thresh_cases],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases); hold on
-semilogy(datetime('2020-03-08')+days,y_dbl_day,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
-semilogy(datetime('2020-02-27')+days+0.5,y_dbl_2_days,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
-semilogy(datetime('2020-02-19')+days,y_dbl_3_days,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
-semilogy(datetime('2020-02-10')+days,y_dbl_4_days,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
+semilogy(datetime('2020-03-07')+days+0.45,y_dbl_day,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
+semilogy(datetime('2020-02-27')+days+0.48,y_dbl_2_days,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
+semilogy(datetime('2020-02-18')+days+0.52,y_dbl_3_days,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-02-09')+days+0.55,y_dbl_4_days,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
 hold off
 ylabel('cases'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
-xlim([datetime('2020-03-09'), datetime('today')+21])
+xlim([datetime('2020-03-09'), datetime('today')+21]) % [datetime('2020-03-15'),datetime('2020-03-18')])
 ylim([1e2,1e6])
 
 fig11 = figure(11);
@@ -263,15 +271,15 @@ for i = 1:length(R)
     semilogy(R{i}.dates-R{i}.shift_cases_norm,R{i}.cases/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases_norm); hold on
 end
 semilogy([datetime('2019-12-01'),today_date+30],[thresh_cases_norm,thresh_cases_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases_norm); hold on
-semilogy(datetime('2020-03-13')+days,y_dbl_day,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
-semilogy(datetime('2020-03-09')+days+0.5,y_dbl_2_days,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
-semilogy(datetime('2020-03-05')+days,y_dbl_3_days,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
-semilogy(datetime('2020-03-02')+days,y_dbl_4_days,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
+semilogy(datetime('2020-03-12')+days+0.65,y_dbl_day,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
+semilogy(datetime('2020-03-08')+days+0.9,y_dbl_2_days,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
+semilogy(datetime('2020-03-05')+days+0.13,y_dbl_3_days,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-03-01')+days+0.38,y_dbl_4_days,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
 hold off
 ylabel('cases/million'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
-xlim([datetime('2020-03-13'), datetime('today')+21])
+xlim([datetime('2020-03-13'), datetime('today')+21]) %[datetime('2020-03-15'),datetime('2020-03-18')]
 ylim([1e1,1e4]) %300])
 
 fig13 = figure(13);
@@ -369,15 +377,15 @@ for i = 1:length(R)
 end
 semilogy([datetime('2019-12-01'),today_date+30],[thresh_deaths_norm,thresh_deaths_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_deaths_norm); hold on
 scal = 100;
-semilogy(datetime('2020-03-14')+days,y_dbl_day/scal,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
-semilogy(datetime('2020-03-09')+days,y_dbl_2_days/scal,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
-semilogy(datetime('2020-03-04')+days,y_dbl_3_days/scal,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
-semilogy(datetime('2020-02-28')+days,y_dbl_4_days/scal,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
+semilogy(datetime('2020-03-13')+days+0.61,y_dbl_day/scal,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
+semilogy(datetime('2020-03-08')+days+0.85,y_dbl_2_days/scal,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
+semilogy(datetime('2020-03-04')+days+0.1,y_dbl_3_days/scal,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-02-28')+days+0.35,y_dbl_4_days/scal,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
 hold off
 ylabel('deaths/million'); %xlabel('days')
 title('COVID-19 Normalized by population, shifted to same deaths at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
-xlim([datetime('2020-03-17'), datetime('today')+28])
+xlim([datetime('2020-03-17'), datetime('today')+28]) % [datetime('2020-03-17'),datetime('2020-03-20')])
 ylim([2e-1,3e2]) % 5])
 
 % figure(25)
@@ -451,6 +459,7 @@ if CTRL_SAVE_DATA
     fn_save_country_data(oSpain);
     fn_save_country_data(oNewYork);
     fn_save_country_data(oSweden);
+    fn_save_country_data(oFrance);
 end
 
 % fclose(fid_log);
