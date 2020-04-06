@@ -366,7 +366,7 @@ hold off
 ylabel('deaths/million'); %xlabel('days')
 title('COVID-19 Normalized by population, shifted to same deaths at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
-xlim([datetime('2020-03-16'), datetime('today')+14])
+xlim([datetime('2020-03-17'), datetime('today')+28])
 ylim([0,ymax21]) % 5])
 
 fig25 = figure(25);
@@ -417,10 +417,34 @@ hold off
 ylabel('deaths/million/day'); %xlabel('days')
 title('COVID-19 Normalized by population, shifted to same deaths at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
-xlim([datetime('2020-03-16'), datetime('today')+7])
+fig24_xaxis_days = 21;
+xlim([datetime('2020-03-16'), datetime('today')+fig24_xaxis_days])
 ylim([0,3]) %10])
 
-figure(25)
+% i = 15;  % select Region
+% diff_data = diff(R{i}.deaths)/R{i}.population;
+% dates_T = R{i}.dates(2:end).';
+
+fig26 = figure(26);
+if CTRL_SAVE_PLOT, fig26.WindowStyle = 'normal'; fig26.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
+leg = {};
+for i = 1:length(R)
+    semilogy(R{i}.dates(2:end)-R{i}.shift_deaths_norm,diff(R{i}.deaths/R{i}.population),R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+end
+% semilogy(R{i}.dates(2:end)-R{i}.shift_deaths_norm,diff_data,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+scal = 30;
+semilogy(datetime('2020-03-16')+days,y_dbl_day/scal,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
+semilogy(datetime('2020-03-16')+days,y_dbl_2_days/scal,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
+semilogy(datetime('2020-03-16')+days,y_dbl_3_days/scal,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-03-16')+days,y_dbl_4_days/scal,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
+hold off
+ylabel('deaths/million/day'); %xlabel('days')
+title('COVID-19 Normalized by population, shifted to same deaths at threshold');
+legend(leg,'Location','NorthWest','FontSize',12)
+xlim([datetime('2020-03-16'), datetime('today')+fig24_xaxis_days])
+ylim([1e-2,1e2])
+
+figure(26)
 
 if CTRL_SAVE_PLOT
     out_folder = 'plot';
@@ -442,6 +466,7 @@ if CTRL_SAVE_PLOT
     if exist('fig25','var'), saveas(fig25,sprintf('%s/covid19-2d2-deaths-norm-shift-log.jpg',out_folder)); end  
     if exist('fig23','var'), saveas(fig23,sprintf('%s/covid19-2e-deaths-day-shift.jpg',out_folder)); end  
     if exist('fig24','var'), saveas(fig24,sprintf('%s/covid19-2f-deaths-day-norm-shift.jpg',out_folder)); end  
+    if exist('fig26','var'), saveas(fig26,sprintf('%s/covid19-2f2-deaths-day-norm-shift-log.jpg',out_folder)); end  
 end
 
 if CTRL_SAVE_DATA
@@ -462,5 +487,5 @@ if CTRL_SAVE_DATA
     fn_save_country_data(oFrance);
 end
 
-% fclose(fid_log);
+fclose(fid_log);
 
