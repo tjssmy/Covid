@@ -38,7 +38,7 @@ R = {};
 oCanada = fn_create_region('Canada',37,'2020-01-27',nLW_C,'o-');
 
 
-thresh_cases = 500;
+thresh_cases = 100;
 thresh_cases_norm = 500/oCanada.population;
 thresh_deaths = 10;
 thresh_deaths_norm = 10/oCanada.population;
@@ -76,7 +76,7 @@ oItaly.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,th
 fn_region_fprintf(fid_log,oItaly);
 R{end+1} = oItaly;
 
-oChina = fn_create_region('China',1400,'2020-01-22',nLW,'o-');
+oChina = fn_create_region('China',1400,'2020-01-17',nLW,'o-');
 oChina.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oChina);
 oChina.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oChina);
 oChina.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oChina);
@@ -222,17 +222,17 @@ for i = 1:length(R)
     semilogy(R{i}.dates-R{i}.shift_cases,R{i}.cases,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
 end
 semilogy([datetime('2019-12-01'),today_date+30],[thresh_cases,thresh_cases],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases); hold on
-semilogy(datetime('2020-03-07')+days+0.45,y_dbl_day,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
-semilogy(datetime('2020-02-27')+days+0.48,y_dbl_2_days,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
-semilogy(datetime('2020-02-18')+days+0.52,y_dbl_3_days,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
-semilogy(datetime('2020-02-09')+days+0.55,y_dbl_4_days,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
+semilogy(datetime('2020-03-03')+days+0.5,y_dbl_day,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
+semilogy(datetime('2020-02-25')+days+0.85,y_dbl_2_days,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
+semilogy(datetime('2020-02-19')+days+0.24,y_dbl_3_days,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-02-12')+days+0.6,y_dbl_4_days,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
 hold off
 ylabel('cases'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-09'), datetime('today')+21]) % [datetime('2020-03-15'),datetime('2020-03-18')])
-ylim([1e2,5e5])
-figure(15)
+ylim([50,5e5])
+% figure(15)
 
 fig11 = figure(11);
 if CTRL_SAVE_PLOT, fig11.WindowStyle = 'normal'; fig11.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
