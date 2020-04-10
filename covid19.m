@@ -387,7 +387,7 @@ ylabel('deaths/million'); %xlabel('days')
 title('COVID-19 Normalized by population, shifted to same deaths at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-17'), datetime('today')+28]) % [datetime('2020-03-17'),datetime('2020-03-20')])
-ylim([2e-1,3.5e2]) % 5])
+ylim([2e-1,4e2]) % 5])
 
 % figure(25)
 
@@ -403,7 +403,7 @@ ylabel('deaths/day'); %xlabel('days')
 title('COVID-19 shifted to same deaths at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-14'), datetime('today')+14])
-ylim([0,50])
+ylim([0,80])
 
 % figure(23)
 
