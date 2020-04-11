@@ -10,6 +10,8 @@ fid_log = fopen(fn_log,'w');
 % stdout = 1;
 % fid_log = stdout;
 
+sDataDate = sprintf('%s data',datestr(datetime('today')-1,'mmm dd'));
+
 sLW = 'LineWidth';
 sLS = 'LineStyle';
 sC = 'Color';
@@ -200,6 +202,7 @@ title('COVID-19')
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-01-21'), datetime('today')+1])
 % ylim([0,10000])
+ymax1 = fig1.Children(2).YLim(2);
 
 fig10 = figure(10);
 if CTRL_SAVE_PLOT, fig10.WindowStyle = 'normal'; fig10.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -213,7 +216,7 @@ ylabel('cases'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-01-21'), datetime('today')+21])
-ylim([0,20000])
+ylim([0,ymax1]) %20000])
 
 fig15 = figure(15);
 if CTRL_SAVE_PLOT, fig15.WindowStyle = 'normal'; fig15.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -228,10 +231,10 @@ semilogy(datetime('2020-02-19')+days+0.24,y_dbl_3_days,'k-.',sLW,nLW_dbl);leg{en
 semilogy(datetime('2020-02-12')+days+0.6,y_dbl_4_days,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
 hold off
 ylabel('cases'); %xlabel('days')
-title('COVID-19 shifted to same cases at threshold');
+title(sprintf('COVID-19 shifted to same cases at threshold (%s)',sDataDate));
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-09'), datetime('today')+21]) % [datetime('2020-03-15'),datetime('2020-03-18')])
-ylim([50,5e5])
+ylim([50,6e5])
 % figure(15)
 
 fig11 = figure(11);
@@ -292,7 +295,7 @@ end
 % plot([datetime('2019-12-01'),today_date+30],[thresh_cases_norm,thresh_cases_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases_norm); hold on
 hold off
 ylabel('cases/day'); %xlabel('days')
-title('COVID-19 shifted to same cases at threshold');
+title(sprintf('COVID-19 shifted to same cases at threshold (%s)',sDataDate));
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-14'), datetime('today')+21])
 ylim([0,15000])
@@ -353,7 +356,7 @@ title('COVID-19 Normalized for population')
 % title('FFT E(z)');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-02-01'), datetime('today')])
-ymax21 = 12;
+ymax21 = 2e2;
 ylim([0,ymax21]) % Italy: 120])
 
 fig22 = figure(22);
@@ -368,7 +371,7 @@ ylabel('deaths/million'); %xlabel('days')
 title('COVID-19 Normalized by population, shifted to same deaths at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-17'), datetime('today')+28])
-ylim([0,ymax21]) % 5])
+ylim([0,ymax21])
 
 fig25 = figure(25);
 if CTRL_SAVE_PLOT, fig25.WindowStyle = 'normal'; fig25.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -384,10 +387,10 @@ semilogy(datetime('2020-03-04')+days+0.1,y_dbl_3_days/scal,'k-.',sLW,nLW_dbl);le
 semilogy(datetime('2020-02-28')+days+0.35,y_dbl_4_days/scal,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
 hold off
 ylabel('deaths/million'); %xlabel('days')
-title('COVID-19 Normalized by population, shifted to same deaths at threshold');
+title(sprintf('COVID-19 Normalized by population, shifted to same deaths at threshold (%s)',sDataDate));
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-17'), datetime('today')+28]) % [datetime('2020-03-17'),datetime('2020-03-20')])
-ylim([2e-1,4e2]) % 5])
+ylim([2e-1,5e2])
 
 % figure(25)
 
@@ -403,7 +406,7 @@ ylabel('deaths/day'); %xlabel('days')
 title('COVID-19 shifted to same deaths at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-14'), datetime('today')+14])
-ylim([0,80])
+ylim([0,100])
 
 % figure(23)
 
@@ -420,7 +423,7 @@ title('COVID-19 Normalized by population, shifted to same deaths at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 fig24_xaxis_days = 21;
 xlim([datetime('2020-03-16'), datetime('today')+fig24_xaxis_days])
-ylim([0,3]) %10])
+ylim([0,10])
 
 % i = 15;  % select Region
 % diff_data = diff(R{i}.deaths)/R{i}.population;
@@ -440,10 +443,10 @@ semilogy(datetime('2020-03-16')+days,y_dbl_3_days/scal,'k-.',sLW,nLW_dbl);leg{en
 semilogy(datetime('2020-03-16')+days,y_dbl_4_days/scal,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
 hold off
 ylabel('deaths/million/day'); %xlabel('days')
-title('COVID-19 Normalized by population, shifted to same deaths at threshold');
+title(sprintf('COVID-19 Normalized by population, shifted to same deaths at threshold (%s)',sDataDate));
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-16'), datetime('today')+fig24_xaxis_days])
-ylim([1e-2,1e2])
+ylim([1e-2,5e1])
 
 figure(26)
 
