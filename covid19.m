@@ -234,7 +234,7 @@ ylabel('cases'); %xlabel('days')
 title(sprintf('COVID-19 shifted to same cases at threshold (%s)',sDataDate));
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-09'), datetime('today')+21]) % [datetime('2020-03-15'),datetime('2020-03-18')])
-ylim([50,6e5])
+ylim([50,7e5])
 % figure(15)
 
 fig11 = figure(11);
@@ -284,7 +284,7 @@ ylabel('cases/million'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-13'), datetime('today')+21]) %[datetime('2020-03-15'),datetime('2020-03-18')]
-ylim([1e1,1e4]) %300])
+ylim([1e1,2e4])
 
 fig13 = figure(13);
 if CTRL_SAVE_PLOT, fig13.WindowStyle = 'normal'; fig13.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
