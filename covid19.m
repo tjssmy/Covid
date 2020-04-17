@@ -390,7 +390,7 @@ ylabel('deaths/million'); %xlabel('days')
 title(sprintf('COVID-19 Normalized by population, shifted to same deaths at threshold (%s)',sDataDate));
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-17'), datetime('today')+28]) % [datetime('2020-03-17'),datetime('2020-03-20')])
-ylim([2e-1,6e2])
+ylim([2e-1,7e2])
 
 % figure(25)
 
@@ -406,7 +406,7 @@ ylabel('deaths/day'); %xlabel('days')
 title('COVID-19 shifted to same deaths at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-14'), datetime('today')+14])
-ylim([0,130])
+ylim([0,200])
 
 % figure(23)
 
@@ -423,7 +423,7 @@ title('COVID-19 Normalized by population, shifted to same deaths at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 fig24_xaxis_days = 21;
 xlim([datetime('2020-03-16'), datetime('today')+fig24_xaxis_days])
-ylim([0,10])
+ylim([0,20])
 
 % i = 15;  % select Region
 % diff_data = diff(R{i}.deaths)/R{i}.population;
