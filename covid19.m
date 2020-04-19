@@ -192,7 +192,10 @@ fig1 = figure(1);
 if CTRL_SAVE_PLOT, fig1.WindowStyle = 'normal'; fig1.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates,R{i}.cases,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
+    h = plot(R{i}.dates,R{i}.cases,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
+%     if strcmp(R{i}.fn_no_ext,'Ontario')
+%         cColSw = h.Color;
+%     end
 end
 plot([datetime('2019-12-01'),today_date+30],[thresh_cases,thresh_cases],'k'); leg{end+1}=sprintf('thresh=%d',thresh_cases); hold on
 hold off
