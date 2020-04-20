@@ -1,10 +1,11 @@
-function Region = fn_create_region(name,population,sStart,nLW,s_plot_type)
+function Region = fn_create_region(name,population,sStart,nLW,s_plot_type,s_color)
 
 Region.fn_no_ext = name;
 Region.population = population; % million
 Region.start = sStart;
 Region.lw = nLW;
 Region.pt = s_plot_type;
+Region.col = s_color;
 
 Region.shift_cases = 0;
 Region.shift_cases_norm = 0;

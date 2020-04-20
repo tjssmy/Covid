@@ -2,7 +2,7 @@ clearvars; clearvars -GLOBAL; close all; plotbrowser('off'); %clc
 set(0,'DefaultFigureWindowStyle','docked')
 
 CTRL_SAVE_DATA = 0;
-CTRL_SAVE_PLOT = 1;
+CTRL_SAVE_PLOT = 0;
 
 sPgm = 'covid19_ont_sweden';
 fn_log = sprintf('%s.txt',sPgm);
@@ -25,7 +25,6 @@ cBlu = [0 0.4470 0.7410];
 cRed = [0.8500 0.3250 0.0980];
 cYel = [0.9290 0.6940 0.1250];
 cPur = [0.4940 0.1840 0.5560];
-cOrgRed = [0.8500 0.3250 0.0980];
 cDarkRed = [0.6350 0.0780 0.184];
 cLtBlu = [0.5 0.7 1]; % cBlu = [0 0.4470 0.7410];
 cLtRed = [1 0.8 0.7]; % cRed = [0.8500 0.3250 0.0980];
@@ -39,14 +38,13 @@ nLW_dbl = 1;  % plots of growth per day (ie double per day)
 R = {};
 
 % start_date = datetime(Canada.start);  % used to ref all plots
-oCanada = fn_create_region('Canada',37,'2020-01-27',nLW_C,'o-');
+oCanada = fn_create_region('Canada',37,'2020-01-27',nLW_C,'o-',cBlu);
 
 thresh_deaths = 10;
 thresh_deaths_norm = thresh_deaths/oCanada.population;
 today_date = datetime('today');
 
-oOntario = fn_create_region('Ontario',14.3,'2020-03-01',nLW_O,'o-');
-oOntario.col = cOrgRed;
+oOntario = fn_create_region('Ontario',14.3,'2020-03-01',nLW_O,'o-',cRed);
 
 data_gt_thresh = oOntario.deaths/oOntario.population > thresh_deaths_norm; % find date that Ontario is at thresh (so its dates won't be shifted)
 thresh_i = find(data_gt_thresh,1);
@@ -57,8 +55,7 @@ oOntario.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,
 fn_region_fprintf(fid_log,oOntario);
 R{end+1} = oOntario;
 
-oSweden = fn_create_region('Sweden',10.3,'2020-03-01',nLW,'*-');
-oSweden.col = cDarkRed;
+oSweden = fn_create_region('Sweden',10.3,'2020-03-01',nLW,'*-',cDarkRed);
 oSweden.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thresh_deaths_norm,oSweden);
 fn_region_fprintf(fid_log,oSweden);
 R{end+1} = oSweden;

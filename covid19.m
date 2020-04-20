@@ -25,7 +25,10 @@ cBlu = [0 0.4470 0.7410];
 cRed = [0.8500 0.3250 0.0980];
 cYel = [0.9290 0.6940 0.1250];
 cPur = [0.4940 0.1840 0.5560];
-cLtBlu = [0.5 0.7 1]; % cBlu = [0 0.4470 0.7410];
+cGrn = [0.4660 0.6740 0.1880];
+cLtBlu = [0.3010 0.7450 0.9330];
+cDarkRed = [0.6350 0.0780 0.184];
+% cLtBlu = [0.5 0.7 1]; % cBlu = [0 0.4470 0.7410];
 cLtRed = [1 0.8 0.7]; % cRed = [0.8500 0.3250 0.0980];
 cLtYel = [1 0.9 0.7]; % cYel = [0.9290 0.6940 0.1250];
 
@@ -36,8 +39,11 @@ nLW_dbl = 1;  % plots of growth per day (ie double per day)
 
 R = {};
 
+Nave = 7;
+log0 = 1e-4; % log plots won't plot -inf
+
 % start_date = datetime(Canada.start);  % used to ref all plots
-oCanada = fn_create_region('Canada',37,'2020-01-27',nLW_C,'o-');
+oCanada = fn_create_region('Canada',37,'2020-01-27',nLW_C,'o-',cBlu);
 
 
 thresh_cases = 100;
@@ -70,7 +76,7 @@ fn_region_fprintf(fid_log,oCanada);
 R{end+1} = oCanada;  % update shift parms before copy value to R{}
 
 
-oItaly = fn_create_region('Italy',60,'2020-02-15',nLW,'o-');
+oItaly = fn_create_region('Italy',60,'2020-02-15',nLW,'o-',cRed);
 oItaly.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oItaly);
 oItaly.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oItaly);
 oItaly.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oItaly);
@@ -78,7 +84,7 @@ oItaly.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,th
 fn_region_fprintf(fid_log,oItaly);
 R{end+1} = oItaly;
 
-oChina = fn_create_region('China',1400,'2020-01-17',nLW,'o-');
+oChina = fn_create_region('China',1400,'2020-01-17',nLW,'o-',cYel);
 oChina.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oChina);
 oChina.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oChina);
 oChina.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oChina);
@@ -86,7 +92,7 @@ oChina.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,th
 fn_region_fprintf(fid_log,oChina);
 R{end+1} = oChina;
 
-oUSA = fn_create_region('USA',328,'2020-01-22',nLW,'o-');
+oUSA = fn_create_region('USA',328,'2020-01-22',nLW,'o-',cPur);
 oUSA.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oUSA);
 oUSA.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oUSA);
 oUSA.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oUSA);
@@ -94,7 +100,7 @@ oUSA.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thre
 fn_region_fprintf(fid_log,oUSA);
 R{end+1} = oUSA;
 
-oSKorea = fn_create_region('SKorea',52,'2020-01-22',nLW,'o-');
+oSKorea = fn_create_region('SKorea',52,'2020-01-22',nLW,'o-',cGrn);
 oSKorea.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oSKorea);
 oSKorea.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oSKorea);
 oSKorea.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oSKorea);
@@ -102,7 +108,7 @@ oSKorea.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,t
 fn_region_fprintf(fid_log,oSKorea);
 R{end+1} = oSKorea;
 
-oGermany = fn_create_region('Germany',83,'2020-02-24',nLW,'o-');
+oGermany = fn_create_region('Germany',83,'2020-02-24',nLW,'o-',cLtBlu);
 oGermany.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oGermany);
 oGermany.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oGermany);
 oGermany.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oGermany);
@@ -110,7 +116,7 @@ oGermany.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,
 fn_region_fprintf(fid_log,oGermany);
 R{end+1} = oGermany;
 
-oDenmark = fn_create_region('Denmark',6,'2020-02-27',nLW,'*:');
+oDenmark = fn_create_region('Denmark',6,'2020-02-27',nLW,'*:',cDarkRed);
 oDenmark.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oDenmark);
 oDenmark.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oDenmark);
 oDenmark.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oDenmark);
@@ -118,7 +124,7 @@ oDenmark.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,
 fn_region_fprintf(fid_log,oDenmark);
 R{end+1} = oDenmark;
 
-oSpain = fn_create_region('Spain',47,'2020-01-31',nLW,'*:');
+oSpain = fn_create_region('Spain',47,'2020-01-31',nLW,'*:',cBlu);
 oSpain.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oSpain);
 oSpain.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oSpain);
 oSpain.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oSpain);
@@ -126,7 +132,7 @@ oSpain.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,th
 fn_region_fprintf(fid_log,oSpain);
 R{end+1} = oSpain;
 
-oOntario = fn_create_region('Ontario',14.3,'2020-03-01',nLW_O,'o-');
+oOntario = fn_create_region('Ontario',14.3,'2020-03-01',nLW_O,'o-',cRed);
 oOntario.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oOntario);
 oOntario.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oOntario);
 oOntario.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oOntario);
@@ -134,7 +140,7 @@ oOntario.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,
 fn_region_fprintf(fid_log,oOntario);
 R{end+1} = oOntario;
 
-oQuebec = fn_create_region('Quebec',8.5,'2020-02-28',nLW_O,'o-');
+oQuebec = fn_create_region('Quebec',8.5,'2020-02-28',nLW_O,'o-',cYel);
 oQuebec.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oQuebec);
 oQuebec.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oQuebec);
 oQuebec.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oQuebec);
@@ -142,7 +148,7 @@ oQuebec.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,t
 fn_region_fprintf(fid_log,oQuebec);
 R{end+1} = oQuebec;
 
-oNewYork = fn_create_region('NewYork',20,'2020-03-01',nLW_O,'o-');
+oNewYork = fn_create_region('NewYork',20,'2020-03-01',nLW_O,'o-',cPur);
 oNewYork.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oNewYork);
 oNewYork.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oNewYork);
 oNewYork.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oNewYork);
@@ -150,7 +156,7 @@ oNewYork.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,
 fn_region_fprintf(fid_log,oNewYork);
 R{end+1} = oNewYork;
 
-oOttawa = fn_create_region('Ottawa',0.9,'2020-03-11',nLW_O,'o-');
+oOttawa = fn_create_region('Ottawa',0.9,'2020-03-11',nLW_O,'o-',cGrn);
 oOttawa.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oOttawa);
 oOttawa.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oOttawa);
 oOttawa.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oOttawa);
@@ -158,7 +164,7 @@ oOttawa.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,t
 fn_region_fprintf(fid_log,oOttawa);
 R{end+1} = oOttawa;
 
-oBC = fn_create_region('BC',4.9,'2020-03-01',nLW_O,'o-');
+oBC = fn_create_region('BC',4.9,'2020-03-01',nLW_O,'o-',cLtBlu);
 oBC.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oBC);
 oBC.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oBC);
 oBC.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oBC);
@@ -166,7 +172,7 @@ oBC.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,thres
 fn_region_fprintf(fid_log,oBC);
 R{end+1} = oBC;
 
-oSweden = fn_create_region('Sweden',10.3,'2020-03-01',nLW,'*-');
+oSweden = fn_create_region('Sweden',10.3,'2020-03-01',nLW,'*-',cDarkRed);
 oSweden.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oSweden);
 oSweden.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oSweden);
 oSweden.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oSweden);
@@ -174,7 +180,7 @@ oSweden.shift_deaths_norm = fn_get_shift('deaths_norm',thresh_date_deaths_norm,t
 fn_region_fprintf(fid_log,oSweden);
 R{end+1} = oSweden;
 
-oFrance = fn_create_region('France',67,'2020-02-25',nLW,'*--');
+oFrance = fn_create_region('France',67,'2020-02-25',nLW,'*--',cBlu);
 oFrance.shift_cases = fn_get_shift('cases',thresh_date_cases,thresh_cases,oFrance);
 oFrance.shift_cases_norm = fn_get_shift('cases_norm',thresh_date_cases_norm,thresh_cases_norm,oFrance);
 oFrance.shift_deaths = fn_get_shift('deaths',thresh_date_deaths,thresh_deaths,oFrance);
@@ -192,7 +198,7 @@ fig1 = figure(1);
 if CTRL_SAVE_PLOT, fig1.WindowStyle = 'normal'; fig1.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    h = plot(R{i}.dates,R{i}.cases,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
+    h = plot(R{i}.dates,R{i}.cases,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
 %     if strcmp(R{i}.fn_no_ext,'Ontario')
 %         cColSw = h.Color;
 %     end
@@ -211,7 +217,7 @@ fig10 = figure(10);
 if CTRL_SAVE_PLOT, fig10.WindowStyle = 'normal'; fig10.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates-R{i}.shift_cases,R{i}.cases,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
+    plot(R{i}.dates-R{i}.shift_cases,R{i}.cases,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
 end
 plot([datetime('2019-12-01'),today_date+30],[thresh_cases,thresh_cases],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases); hold on
 hold off
@@ -225,13 +231,13 @@ fig15 = figure(15);
 if CTRL_SAVE_PLOT, fig15.WindowStyle = 'normal'; fig15.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    semilogy(R{i}.dates-R{i}.shift_cases,R{i}.cases,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
+    semilogy(R{i}.dates-R{i}.shift_cases,R{i}.cases,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
 end
 semilogy([datetime('2019-12-01'),today_date+30],[thresh_cases,thresh_cases],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases); hold on
 semilogy(datetime('2020-03-03')+days+0.5,y_dbl_day,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
 semilogy(datetime('2020-02-25')+days+0.85,y_dbl_2_days,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
 semilogy(datetime('2020-02-19')+days+0.24,y_dbl_3_days,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
-semilogy(datetime('2020-02-12')+days+0.6,y_dbl_4_days,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
+semilogy(datetime('2020-02-12')+days+0.6,y_dbl_4_days,'k-',sC,R{i}.col,sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
 hold off
 ylabel('cases'); %xlabel('days')
 title(sprintf('COVID-19 shifted to same cases at threshold (%s)',sDataDate));
@@ -244,7 +250,7 @@ fig11 = figure(11);
 if CTRL_SAVE_PLOT, fig11.WindowStyle = 'normal'; fig11.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates,R{i}.cases/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=m_description(R{i}); hold on
+    plot(R{i}.dates,R{i}.cases/R{i}.population,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=m_description(R{i}); hold on
 end
 plot([datetime('2019-12-01'),today_date+30],[thresh_cases_norm,thresh_cases_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases_norm); hold on
 hold off
@@ -261,7 +267,7 @@ fig12 = figure(12);
 if CTRL_SAVE_PLOT, fig12.WindowStyle = 'normal'; fig12.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates-R{i}.shift_cases_norm,R{i}.cases/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases_norm); hold on
+    plot(R{i}.dates-R{i}.shift_cases_norm,R{i}.cases/R{i}.population,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases_norm); hold on
 end
 plot([datetime('2019-12-01'),today_date+30],[thresh_cases_norm,thresh_cases_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases_norm); hold on
 hold off
@@ -275,7 +281,7 @@ fig16 = figure(16);
 if CTRL_SAVE_PLOT, fig16.WindowStyle = 'normal'; fig16.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    semilogy(R{i}.dates-R{i}.shift_cases_norm,R{i}.cases/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases_norm); hold on
+    semilogy(R{i}.dates-R{i}.shift_cases_norm,R{i}.cases/R{i}.population,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases_norm); hold on
 end
 semilogy([datetime('2019-12-01'),today_date+30],[thresh_cases_norm,thresh_cases_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases_norm); hold on
 semilogy(datetime('2020-03-12')+days+0.65,y_dbl_day,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
@@ -293,7 +299,7 @@ fig13 = figure(13);
 if CTRL_SAVE_PLOT, fig13.WindowStyle = 'normal'; fig13.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates(2:end)-R{i}.shift_cases,diff(R{i}.cases),R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
+    plot(R{i}.dates(2:end)-R{i}.shift_cases,diff(R{i}.cases),R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
 end
 % plot([datetime('2019-12-01'),today_date+30],[thresh_cases_norm,thresh_cases_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_cases_norm); hold on
 hold off
@@ -307,7 +313,7 @@ fig14 = figure(14);
 if CTRL_SAVE_PLOT, fig14.WindowStyle = 'normal'; fig14.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates(2:end)-R{i}.shift_cases,diff(R{i}.cases)/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
+    plot(R{i}.dates(2:end)-R{i}.shift_cases,diff(R{i}.cases)/R{i}.population,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
 end
 % plot([datetime('2019-12-01'),today_date+30],[thresh_cases,thresh_cases],'k'); leg{end+1}=sprintf('thresh=%d',thresh_cases); hold on
 hold off
@@ -317,11 +323,38 @@ legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-14'), datetime('today')+21])
 ylim([0,600])
 
+fig17 = figure(17);
+if CTRL_SAVE_PLOT, fig17.WindowStyle = 'normal'; fig17.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
+leg = {};
+for i = 1:length(R)
+    diff_data = diff(R{i}.cases/R{i}.population);
+    diff_data_nz = diff_data + log0*(diff_data==0);  % change zeros to 1e-4 (for log plot min)
+    
+%     data_ave = fn_getDataAve(Nave,diff_data);
+    data_ave_nz = fn_getDataAve(Nave,diff_data_nz);
+%     semilogy(R{i}.dates(2:end)-R{i}.shift_cases,diff(R{i}.cases)/R{i}.population,sC,R{i}.col);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_cases); hold on
+    semilogy(R{i}.dates(2:end)-R{i}.shift_deaths_norm,data_ave_nz,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d ave',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+end
+% semilogy([datetime('2019-12-01'),today_date+30],[thresh_cases,thresh_cases],'k'); leg{end+1}=sprintf('thresh=%d',thresh_cases); hold on
+scal = 1;
+semilogy(datetime('2020-03-13')+days,y_dbl_day/scal,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
+semilogy(datetime('2020-03-13')+days,y_dbl_2_days/scal,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
+semilogy(datetime('2020-03-13')+days,y_dbl_3_days/scal,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-03-13')+days,y_dbl_4_days/scal,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
+hold off
+ylabel('average cases/million/day'); %xlabel('days')
+title('COVID-19 shifted to same cases at threshold');
+legend(leg,'Location','NorthWest','FontSize',12)
+xlim([datetime('2020-03-14'), datetime('today')+21])
+ylim([9e-1,1e3])
+
+% figure(17)
+
 fig2 = figure(2);
 if CTRL_SAVE_PLOT, fig2.WindowStyle = 'normal'; fig2.Position = [240 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates,R{i}.deaths,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
+    plot(R{i}.dates,R{i}.deaths,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
 end
 plot([datetime('2019-12-01'),today_date+30],[thresh_deaths,thresh_deaths],'k'); leg{end+1}=sprintf('thresh=%d',thresh_deaths); hold on
 hold off
@@ -336,7 +369,7 @@ fig20 = figure(20);
 if CTRL_SAVE_PLOT, fig20.WindowStyle = 'normal'; fig20.Position = [340 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates-R{i}.shift_deaths,R{i}.deaths,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths); hold on
+    plot(R{i}.dates-R{i}.shift_deaths,R{i}.deaths,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths); hold on
 end
 plot([datetime('2019-12-01'),today_date+30],[thresh_deaths,thresh_deaths],'k'); leg{end+1}=sprintf('thresh=%d',thresh_deaths); hold on
 hold off
@@ -350,7 +383,7 @@ fig21 = figure(21);
 if CTRL_SAVE_PLOT, fig21.WindowStyle = 'normal'; fig21.Position = [440 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates,R{i}.deaths/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
+    plot(R{i}.dates,R{i}.deaths/R{i}.population,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
 end
 plot([datetime('2019-12-01'),today_date+30],[thresh_deaths_norm,thresh_deaths_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_deaths_norm); hold on
 hold off
@@ -366,7 +399,7 @@ fig22 = figure(22);
 if CTRL_SAVE_PLOT, fig22.WindowStyle = 'normal'; fig22.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates-R{i}.shift_deaths_norm,R{i}.deaths/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+    plot(R{i}.dates-R{i}.shift_deaths_norm,R{i}.deaths/R{i}.population,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
 end
 plot([datetime('2019-12-01'),today_date+30],[thresh_deaths_norm,thresh_deaths_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_deaths_norm); hold on
 hold off
@@ -380,7 +413,7 @@ fig25 = figure(25);
 if CTRL_SAVE_PLOT, fig25.WindowStyle = 'normal'; fig25.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    semilogy(R{i}.dates-R{i}.shift_deaths_norm,R{i}.deaths/R{i}.population,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+    semilogy(R{i}.dates-R{i}.shift_deaths_norm,R{i}.deaths/R{i}.population,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
 end
 semilogy([datetime('2019-12-01'),today_date+30],[thresh_deaths_norm,thresh_deaths_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_deaths_norm); hold on
 scal = 100;
@@ -401,7 +434,7 @@ fig23 = figure(23);
 if CTRL_SAVE_PLOT, fig23.WindowStyle = 'normal'; fig23.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates(2:end)-R{i}.shift_deaths,diff(R{i}.deaths),R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths); hold on
+    plot(R{i}.dates(2:end)-R{i}.shift_deaths,diff(R{i}.deaths),R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths); hold on
 end
 % plot([datetime('2019-12-01'),today_date+30],[thresh_deaths_norm,thresh_deaths_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_deaths_norm); hold on
 hold off
@@ -417,7 +450,7 @@ fig24 = figure(24);
 if CTRL_SAVE_PLOT, fig24.WindowStyle = 'normal'; fig24.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    plot(R{i}.dates(2:end)-R{i}.shift_deaths_norm,diff(R{i}.deaths/R{i}.population),R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+    plot(R{i}.dates(2:end)-R{i}.shift_deaths_norm,diff(R{i}.deaths/R{i}.population),R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
 end
 % plot([datetime('2019-12-01'),today_date+30],[thresh_deaths_norm,thresh_deaths_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_deaths_norm); hold on
 hold off
@@ -436,9 +469,9 @@ fig26 = figure(26);
 if CTRL_SAVE_PLOT, fig26.WindowStyle = 'normal'; fig26.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
 for i = 1:length(R)
-    semilogy(R{i}.dates(2:end)-R{i}.shift_deaths_norm,diff(R{i}.deaths/R{i}.population),R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+    semilogy(R{i}.dates(2:end)-R{i}.shift_deaths_norm,diff(R{i}.deaths/R{i}.population),R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
 end
-% semilogy(R{i}.dates(2:end)-R{i}.shift_deaths_norm,diff_data,R{i}.pt,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+% semilogy(R{i}.dates(2:end)-R{i}.shift_deaths_norm,diff_data,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
 scal = 30;
 semilogy(datetime('2020-03-16')+days,y_dbl_day/scal,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
 semilogy(datetime('2020-03-16')+days,y_dbl_2_days/scal,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
@@ -451,7 +484,34 @@ legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-16'), datetime('today')+fig24_xaxis_days])
 ylim([1e-2,5e1])
 
-figure(26)
+fig27 = figure(27);
+if CTRL_SAVE_PLOT, fig27.WindowStyle = 'normal'; fig27.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
+leg = {};
+for i = 1:length(R)    
+    diff_data = diff(R{i}.deaths/R{i}.population);
+    diff_data_nz = diff_data + log0*(diff_data==0);  % change zeros to 1e-4 (for log plot min)
+    
+%     data_ave = fn_getDataAve(Nave,diff_data);
+    data_ave_nz = fn_getDataAve(Nave,diff_data_nz);
+    
+%     semilogy(R{i}.dates(2:end)-R{i}.shift_deaths_norm,diff(R{i}.deaths/R{i}.population),R{i}.pt,sC,R{i}.col,sLW,1);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+%     semilogy(R{i}.dates(2:end)-R{i}.shift_deaths_norm,data_ave,sC,R{i}.col,sLW,3);leg{end+1}=sprintf('%s %d ave',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+    semilogy(R{i}.dates(2:end)-R{i}.shift_deaths_norm,data_ave_nz,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d ave',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+end
+% semilogy(R{i}.dates(2:end)-R{i}.shift_deaths_norm,diff_data,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+scal = 30;
+semilogy(datetime('2020-03-16')+days,y_dbl_day/scal,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
+semilogy(datetime('2020-03-16')+days,y_dbl_2_days/scal,'k--',sLW,nLW_dbl);leg{end+1}='double every 2 days'; hold on
+semilogy(datetime('2020-03-16')+days,y_dbl_3_days/scal,'k-.',sLW,nLW_dbl);leg{end+1}='double every 3 days'; hold on
+semilogy(datetime('2020-03-16')+days,y_dbl_4_days/scal,'k-',sLW,nLW_dbl);leg{end+1}='double every 4 days'; hold on
+hold off
+ylabel('average deaths/million/day'); %xlabel('days')
+title(sprintf('COVID-19 Normalized by population, shifted to same deaths at threshold (%s)',sDataDate));
+legend(leg,'Location','NorthWest','FontSize',12)
+xlim([datetime('2020-03-16'), datetime('today')+21])
+ylim([1e-2,5e1])
+
+figure(27)
 
 if CTRL_SAVE_PLOT
     out_folder = 'plot';
@@ -466,6 +526,7 @@ if CTRL_SAVE_PLOT
     if exist('fig16','var'), saveas(fig16,sprintf('%s/covid19-1d2-cases-norm-shift-log.jpg',out_folder)); end  
     if exist('fig13','var'), saveas(fig13,sprintf('%s/covid19-1e-cases-day-shift.jpg',out_folder)); end  
     if exist('fig14','var'), saveas(fig14,sprintf('%s/covid19-1f-cases-day-norm-shift.jpg',out_folder)); end  
+    if exist('fig17','var'), saveas(fig17,sprintf('%s/covid19-1f2-cases-day-norm-shift-log-ave.jpg',out_folder)); end  
     if exist('fig2','var'), saveas(fig2,sprintf('%s/covid19-2a-deaths.jpg',out_folder)); end  
     if exist('fig20','var'), saveas(fig20,sprintf('%s/covid19-2b-deaths-shift.jpg',out_folder)); end  
     if exist('fig21','var'), saveas(fig21,sprintf('%s/covid19-2c-deaths-norm.jpg',out_folder)); end  
@@ -474,6 +535,7 @@ if CTRL_SAVE_PLOT
     if exist('fig23','var'), saveas(fig23,sprintf('%s/covid19-2e-deaths-day-shift.jpg',out_folder)); end  
     if exist('fig24','var'), saveas(fig24,sprintf('%s/covid19-2f-deaths-day-norm-shift.jpg',out_folder)); end  
     if exist('fig26','var'), saveas(fig26,sprintf('%s/covid19-2f2-deaths-day-norm-shift-log.jpg',out_folder)); end  
+    if exist('fig27','var'), saveas(fig27,sprintf('%s/covid19-2f3-deaths-day-norm-shift-log-ave.jpg',out_folder)); end  
 end
 
 if CTRL_SAVE_DATA
