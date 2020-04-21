@@ -2,7 +2,7 @@ clearvars; clearvars -GLOBAL; close all; plotbrowser('off'); %clc
 set(0,'DefaultFigureWindowStyle','docked')
 
 CTRL_SAVE_DATA = 0;
-CTRL_SAVE_PLOT = 0;
+CTRL_SAVE_PLOT = 1;
 
 sPgm = 'covid19_ont_sweden';
 fn_log = sprintf('%s.txt',sPgm);

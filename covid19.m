@@ -243,8 +243,8 @@ ylabel('cases'); %xlabel('days')
 title(sprintf('COVID-19 shifted to same cases at threshold (%s)',sDataDate));
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-09'), datetime('today')+21]) % [datetime('2020-03-15'),datetime('2020-03-18')])
-ylim([50,7e5])
-% figure(15)
+ylim([50,ymax1]) % 7e5])
+figure(15)
 
 fig11 = figure(11);
 if CTRL_SAVE_PLOT, fig11.WindowStyle = 'normal'; fig11.Position = [40 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -346,7 +346,7 @@ ylabel('average cases/million/day'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-14'), datetime('today')+21])
-ylim([9e-1,1e3])
+ylim([9e-1,6e2])
 
 % figure(17)
 
@@ -426,7 +426,7 @@ ylabel('deaths/million'); %xlabel('days')
 title(sprintf('COVID-19 Normalized by population, shifted to same deaths at threshold (%s)',sDataDate));
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-17'), datetime('today')+28]) % [datetime('2020-03-17'),datetime('2020-03-20')])
-ylim([2e-1,7e2])
+ylim([2e-1,8e2])
 
 % figure(25)
 
