@@ -377,7 +377,7 @@ ylabel('deaths'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-14'), datetime('today')+7])
-ylim([0,200])
+ylim([0,500])
 
 fig21 = figure(21);
 if CTRL_SAVE_PLOT, fig21.WindowStyle = 'normal'; fig21.Position = [440 378 760 720]; end %default: [440 378 560 420] %'docked')
