@@ -259,7 +259,8 @@ title('COVID-19')
 % title('FFT E(z)');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-01-21'), datetime('today')+1])
-ylim([0,300])
+ymax11 = 1e3;
+ylim([0,ymax11])
 
 % figure(10)
 
@@ -275,7 +276,7 @@ ylabel('cases/million'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-10'), datetime('today')+21])
-ylim([0,1000]) %300])
+ylim([0,ymax11])
 
 fig16 = figure(16);
 if CTRL_SAVE_PLOT, fig16.WindowStyle = 'normal'; fig16.Position = [140 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -365,6 +366,21 @@ legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-02-21'), datetime('today')])
 ylim([0,7000])
 
+fig28 = figure(28);
+if CTRL_SAVE_PLOT, fig28.WindowStyle = 'normal'; fig28.Position = [240 378 760 720]; end %default: [440 378 560 420] %'docked')
+leg = {};
+for i = 1:length(R)
+    semilogy(R{i}.dates,R{i}.deaths,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s',R{i}.fn_no_ext); hold on
+end
+semilogy([datetime('2019-12-01'),today_date+30],[thresh_deaths,thresh_deaths],'k'); leg{end+1}=sprintf('thresh=%d',thresh_deaths); hold on
+hold off
+ylabel('deaths'); %xlabel('days')
+title('COVID-19')
+% title('FFT E(z)');
+legend(leg,'Location','NorthWest','FontSize',12)
+xlim([datetime('2020-02-21'), datetime('today')])
+% ylim([0,7000])
+
 fig20 = figure(20);
 if CTRL_SAVE_PLOT, fig20.WindowStyle = 'normal'; fig20.Position = [340 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
@@ -377,7 +393,7 @@ ylabel('deaths'); %xlabel('days')
 title('COVID-19 shifted to same cases at threshold');
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-14'), datetime('today')+7])
-ylim([0,500])
+ylim([0,1e3])
 
 fig21 = figure(21);
 if CTRL_SAVE_PLOT, fig21.WindowStyle = 'normal'; fig21.Position = [440 378 760 720]; end %default: [440 378 560 420] %'docked')
@@ -426,7 +442,7 @@ ylabel('deaths/million'); %xlabel('days')
 title(sprintf('COVID-19 Normalized by population, shifted to same deaths at threshold (%s)',sDataDate));
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([datetime('2020-03-17'), datetime('today')+28]) % [datetime('2020-03-17'),datetime('2020-03-20')])
-ylim([2e-1,8e2])
+ylim([2e-1,1e3])
 
 % figure(25)
 
@@ -528,6 +544,7 @@ if CTRL_SAVE_PLOT
     if exist('fig14','var'), saveas(fig14,sprintf('%s/covid19-1f-cases-day-norm-shift.jpg',out_folder)); end  
     if exist('fig17','var'), saveas(fig17,sprintf('%s/covid19-1f2-cases-day-norm-shift-log-ave.jpg',out_folder)); end  
     if exist('fig2','var'), saveas(fig2,sprintf('%s/covid19-2a-deaths.jpg',out_folder)); end  
+    if exist('fig28','var'), saveas(fig28,sprintf('%s/covid19-2a2-deaths-log.jpg',out_folder)); end  
     if exist('fig20','var'), saveas(fig20,sprintf('%s/covid19-2b-deaths-shift.jpg',out_folder)); end  
     if exist('fig21','var'), saveas(fig21,sprintf('%s/covid19-2c-deaths-norm.jpg',out_folder)); end  
     if exist('fig22','var'), saveas(fig22,sprintf('%s/covid19-2d-deaths-norm-shift.jpg',out_folder)); end  
