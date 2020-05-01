@@ -89,7 +89,7 @@ ylabel('deaths/million'); xlabel(sprintf('%s date',thresh_date_deaths_norm_reg_r
 title(sprintf('COVID-19 Normalized by population, shifted to same deaths at threshold (%s)',sDataDate));
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([thresh_date_deaths_norm-1, datetime('today')+8]) % [datetime('2020-03-17'),datetime('2020-03-20')])
-ylim([2e-1,250])
+ylim([2e-1,300])
 
 figure(25)
 
