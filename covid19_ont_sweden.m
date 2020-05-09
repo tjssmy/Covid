@@ -76,8 +76,11 @@ b4 = 4*(log(thresh_deaths_norm)+log(scal))/log(2);
 fig25 = figure(25);
 if CTRL_SAVE_PLOT, fig25.WindowStyle = 'normal'; fig25.Position = [540 378 760 720]; end %default: [440 378 560 420] %'docked')
 leg = {};
+max_deaths_all = 0;
 for i = 1:length(R)
     semilogy(R{i}.dates-R{i}.shift_deaths_norm,R{i}.deaths/R{i}.population,R{i}.pt,sC,R{i}.col,sLW,R{i}.lw);leg{end+1}=sprintf('%s %d',R{i}.fn_no_ext,R{i}.shift_deaths_norm); hold on
+    max_deaths = max(R{i}.deaths/R{i}.population);
+    max_deaths_all = max(max_deaths_all,max_deaths);
 end
 semilogy([datetime('2019-12-01'),today_date+30],[thresh_deaths_norm,thresh_deaths_norm],'k'); leg{end+1}=sprintf('thresh=%.1f',thresh_deaths_norm); hold on
 semilogy(thresh_exact+days-b1,y_dbl_day/scal,'k:',sLW,nLW_dbl);leg{end+1}='double every day'; hold on
@@ -89,7 +92,7 @@ ylabel('deaths/million'); xlabel(sprintf('%s date',thresh_date_deaths_norm_reg_r
 title(sprintf('COVID-19 Normalized by population, shifted to same deaths at threshold (%s)',sDataDate));
 legend(leg,'Location','NorthWest','FontSize',12)
 xlim([thresh_date_deaths_norm-1, datetime('today')+8]) % [datetime('2020-03-17'),datetime('2020-03-20')])
-ylim([2e-1,300])
+ylim([2e-1,max_deaths_all*1.2]) %300])
 
 figure(25)
 
